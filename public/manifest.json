@@ -1,25 +1,26 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Gradly",
+  "name": "Gradly - Le cœur avant les yeux",
+  "description": "Application de rencontre révolutionnaire avec photo 100% floutée et défloutage progressif basé sur les conversations.",
   "icons": [
     {
-      "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
-    },
-    {
-      "src": "logo192.png",
+      "src": "/logo.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "logo512.png",
+      "src": "/logo.png",
       "type": "image/png",
       "sizes": "512x512"
     }
   ],
-  "start_url": ".",
+  "start_url": "/",
+  "scope": "/",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#10b981",
+  "background_color": "#0a0a0a",
+  "orientation": "portrait-primary",
+  "categories": ["lifestyle", "dating", "social"],
+  "lang": "fr",
+  "dir": "ltr"
 }

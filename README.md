@@ -1,70 +1,308 @@
-# Getting Started with Create React App
+# 💚 Gradly Frontend V2.5
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Frontend React pour **Gradly** - _Le cœur avant les yeux_
 
-## Available Scripts
+Application de rencontre révolutionnaire avec photo 100% floutée et défloutage progressif basé sur les conversations.
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## 📋 Stack Technique
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **Framework :** React 18
+- **Build :** Vite
+- **Routing :** React Router v6
+- **Auth :** Supabase Auth
+- **API :** Axios
+- **Détection visage :** face-api.js
+- **Animations :** Framer Motion
+- **Confettis :** canvas-confetti
+- **Toasts :** react-toastify
+- **Graphiques :** recharts
+- **Icônes :** lucide-react
+- **Tests E2E :** Playwright
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+---
 
-### `npm test`
+## 🔧 Installation
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 1. Prérequis
 
-### `npm run build`
+- Node.js >= 20.0.0
+- npm >= 9.0.0
+- Backend Gradly lancé sur `http://localhost:3000`
+- Compte Supabase configuré
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 2. Installation des dépendances
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+npm install
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### 3. Configuration
 
-### `npm run eject`
+Copier `.env.example` vers `.env.development` :
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```bash
+cp .env.example .env.development
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Remplir les variables dans `.env.development` :
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```bash
+# API Backend
+REACT_APP_API_URL=http://localhost:3000
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+# Supabase
+REACT_APP_SUPABASE_URL=https://xxxxx.supabase.co
+REACT_APP_SUPABASE_ANON_KEY=your_anon_key
+```
 
-## Learn More
+### 4. Télécharger les modèles face-api.js
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Placer les 6 fichiers dans `public/models/` :
+- `tiny_face_detector_model-weights_manifest.json`
+- `tiny_face_detector_model-shard1`
+- `face_landmark_68_model-weights_manifest.json`
+- `face_landmark_68_model-shard1`
+- `face_recognition_model-weights_manifest.json`
+- `face_recognition_model-shard1`
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Télécharger depuis : https://github.com/justadudewhohacks/face-api.js/tree/master/weights
 
-### Code Splitting
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## 🚀 Démarrage
 
-### Analyzing the Bundle Size
+### Mode développement
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```bash
+npm run dev
+```
 
-### Making a Progressive Web App
+L'application démarre sur `http://localhost:5173`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### Build production
 
-### Advanced Configuration
+```bash
+npm run build
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### Preview production
 
-### Deployment
+```bash
+npm run preview
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+---
 
-### `npm run build` fails to minify
+## 📚 Scripts disponibles
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+| Script | Description |
+|--------|-------------|
+| `npm run dev` | Démarrer en mode développement (Vite) |
+| `npm run build` | Build pour production |
+| `npm run preview` | Preview du build |
+| `npm test` | Lancer les tests unitaires |
+| `npm run test:e2e` | Tests E2E Playwright |
+| `npm run lint` | Linter le code |
+| `npm run lint:fix` | Corriger automatiquement les erreurs |
+
+---
+
+## 🗂️ Structure du projet
+
+```
+gradly-frontend/
+├── public/
+│   ├── index.html         # HTML principal
+│   ├── manifest.json      # PWA manifest
+│   └── models/            # Modèles face-api.js (6 fichiers)
+└── src/
+    ├── App.js             # Composant principal + providers
+    ├── index.js           # Point d'entrée
+    ├── index.css          # CSS global + variables
+    ├── config/            # Configuration (api, supabase)
+    ├── services/          # Services (apiService, authService, faceDetection)
+    ├── context/           # Contexts React (AuthContext, CreditsContext)
+    ├── hooks/             # Hooks custom
+    ├── pages/             # Pages principales + admin
+    ├── components/        # Composants réutilisables + admin
+    ├── styles/            # Styles (theme, animations)
+    ├── utils/             # Utilitaires
+    └── assets/            # Assets (sons)
+```
+
+---
+
+## 🎨 Design
+
+### Thème Dark Mode
+
+- **Couleur primaire :** Vert émeraude (#10b981)
+- **Couleur secondaire :** Rose/Rouge doux (#ff6b6b)
+- **Background :** Noir profond (#0a0a0a)
+- **Surface :** Gris anthracite (#1a1a1a)
+- **Texte :** Blanc cassé (#f5f5f5)
+
+### Polices
+
+- **Titres :** Poppins (Google Fonts)
+- **Corps :** Inter (Google Fonts)
+
+### Accessibilité
+
+- ✅ Contraste minimum 4.5:1 (WCAG AA)
+- ✅ Taille texte ≥ 15px
+- ✅ Focus visible sur tous les éléments interactifs
+- ✅ Texte alternatif sur toutes les images
+
+---
+
+## 🔐 Sécurité
+
+### Détection Visage Obligatoire
+
+Lors de l'inscription (Étape 2), une photo avec visage détectable est **obligatoire**.
+
+- Modèles face-api.js chargés au démarrage
+- Bouton "Suivant" disabled sans détection valide
+- Message clair : "😅 On ne voit pas de visage sur ta photo"
+
+### Auto-refresh Token
+
+- Intercepteur Axios détecte `TOKEN_EXPIRED`
+- Appel automatique `supabase.auth.refreshSession()`
+- Rejoue la requête avec nouveau token
+- Déconnexion si refresh échoue
+
+### Protection Photo
+
+- Check `photo_path` à chaque connexion
+- Redirect `/register/photo` si manquante
+- Pas d'accès Dashboard sans photo
+
+---
+
+## 🎯 Fonctionnalités Principales
+
+### 1. Inscription (4 étapes)
+
+1. **Infos perso** - Prénom, date de naissance, ville, code postal, sexe, orientation
+2. **Photo** - Upload + détection visage obligatoire (bloquante)
+3. **4 questions** - q1_smoke, q2_serious, q3_morning, q4_city
+4. **Email + Password** - Création compte Supabase
+
+### 2. Matching (30 secondes exactes)
+
+- Animation style Hearthstone
+- Progress bar circulaire 0% → 100%
+- Carte compatibilité (score + distance + phrase)
+- POST /matches/find (3 niveaux géo)
+
+### 3. Chat
+
+- **Layout responsive** - 40%|60% desktop, vertical mobile
+- **Polling 2s** - setInterval(GET /chat/:id/messages, 2000)
+- **Défloutage progressif** - CSS blur(99%) → blur(0%)
+- **Animation Cupidon** - Flèche + son + vibration à chaque message
+- **Barre progression** - "Défloutage : 42% 💘"
+- **Message 100%** - Félicitations automatique + confettis
+
+### 4. Paiements
+
+- **Pack 3 crédits** - 4,99€
+- **Pack 10 crédits** - 9,99€
+- **Abonnement Mensuel** - 14,99€ (badge 💎)
+- **Abonnement Annuel** - 99€ (badge 👑)
+- **Confettis** après achat réussi
+
+### 5. Panel Admin (7 pages)
+
+- Dashboard stats + graphiques
+- Liste reports + actions
+- Recherche users + profils
+- Monitoring logs
+- Analytics funnels
+
+---
+
+## 🧪 Tests
+
+### Tests E2E Playwright
+
+```bash
+npm run test:e2e
+```
+
+**Tests critiques :**
+- ✅ Inscription 4 étapes + photo valide
+- ✅ Photo sans visage refusée
+- ✅ Matching → carte compatibilité → chat
+- ✅ 100 messages → 100% défloutage
+- ✅ Session expirée → auto-refresh
+- ✅ Achat crédits → confettis
+
+---
+
+## 🌍 Déploiement
+
+### Vercel
+
+1. Créer compte Vercel
+2. Import GitHub repo
+3. Framework Preset : Create React App
+4. Ajouter variables d'environnement :
+   - `REACT_APP_API_URL=https://api.gradly.me`
+   - `REACT_APP_SUPABASE_URL=https://xxxxx.supabase.co`
+   - `REACT_APP_SUPABASE_ANON_KEY=xxxxx`
+5. Deploy automatique
+
+### Variables d'environnement Production
+
+```bash
+REACT_APP_API_URL=https://api.gradly.me
+REACT_APP_SUPABASE_URL=https://xxxxx.supabase.co
+REACT_APP_SUPABASE_ANON_KEY=xxxxx
+```
+
+---
+
+## 📖 Documentation
+
+- **Composants** - Liste des composants réutilisables
+- **Hooks** - Hooks custom disponibles
+- **Utils** - Fonctions utilitaires
+- **Services** - Services API
+
+---
+
+## 🤝 Contribution
+
+1. Fork le projet
+2. Créer une branche (`git checkout -b feature/ma-feature`)
+3. Commit (`git commit -m 'Ajout ma feature'`)
+4. Push (`git push origin feature/ma-feature`)
+5. Créer une Pull Request
+
+---
+
+## 📝 License
+
+**UNLICENSED** - Propriété privée de Gradly
+
+---
+
+## 👥 Équipe
+
+Développé avec 💚 par l'équipe **Gradly**
+
+Contact : contact@gradly.me
+
+---
+
+## 🔗 Liens
+
+- [Backend API](https://github.com/gradly/gradly-backend)
+- [Documentation](https://docs.gradly.me)
+- [Site web](https://gradly.me)
+- [Application](https://app.gradly.me)
